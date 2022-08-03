@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Map Street View</title>
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map_container, #streetview {
+        float: left;
+        height: 100%;
+        width: 45%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map_container"></div>
+    <div id="streetview"></div>
+    <script>
+      function initialize() {
+        var fenway = {lat: 28.6139, lng: 77.2091};
+        var map = new google.maps.Map(document.getElementById('map_container'), {
+          center: fenway,
+          zoom: 10
+        });
+        var panorama = new google.maps.StreetViewPanorama(
+            document.getElementById('streetview'), {
+              position: fenway,
+              pov: {
+                heading: 34,
+                pitch: 10
+              }
+            });
+        map.setStreetView(panorama);
+      }
+    </script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initialize">
+    </script>
+  </body>
+</html>

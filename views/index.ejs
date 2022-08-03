@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Car Konum</title>
+    <link rel="stylesheet" type="text/css" href="/css/index.css" />
+        <style>
+      html, body, #map-canvas {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      .Harita
+      {
+        width: 100%!important;
+      }
+
+    </style>
+    <h1 id="lan"><%= lan %></h1>
+    <h1 id="lon"><%= lon %></h1>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+
+    <script>
+function initialize() {
+  const lan = document.getElementById("lan").innerHTML;
+  console.log(lan);
+  const lon = document.getElementById("lon").innerHTML;
+  console.log(lon);
+  var baltimore = new google.maps.LatLng(lan,lon);
+  var baltimore1 = new google.maps.LatLng(lan,lon);
+
+
+  var mapOptions = {
+    center: baltimore,
+    zoom: 18
+  };
+  const icon = {
+    url: "https://raw.githubusercontent.com/muhamedsahin/resimlerim/08f13a12540d59e23c02164962ac653cddac295d/location-dot-solid.svg", // url
+    scaledSize: new google.maps.Size(25, 25), // scaled size
+    origin: new google.maps.Point(0,0), // origin
+    anchor: new google.maps.Point(0, 0) // anchor
+};
+  var map = new google.maps.Map(
+      document.getElementById('map-canvas'), mapOptions);
+      
+    var cafeMarker = new google.maps.Marker({
+      position: baltimore1,
+      map: map,
+      icon: icon,
+      title: 'MFS'
+  });
+  var panoramaOptions = {
+    position: baltimore,
+    pov: {
+      heading: 360,
+      pitch: 2
+    }
+  };
+  var panorama = new google.maps.StreetViewPanorama(document.getElementById('pano'), panoramaOptions);
+  map.setStreetView(panorama);
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+    
+  </head>
+  <body>
+    <nav>
+      <div class="logo">
+         Araba Konum
+      </div>
+      <input type="checkbox" id="click">
+      <label for="click" class="menu-btn">
+      <i class="fas fa-bars"></i>
+      </label>
+      <ul>
+         <li><a class="active" href="#">Home</a></li>
+         <li><a href="#">About</a></li>
+         <li><a href="#">Services</a></li>
+         <li><a href="#">Gallery</a></li>
+         <li><a href="#">Feedback</a></li>
+      </ul>
+   </nav>
+
+   <div class="all">
+      <div data-tilt data-tilt-glare data-tilt-max-glare="0.8" class="Harita" id="map-canvas"></div>
+      <div data-tilt data-tilt-glare data-tilt-max-glare="0.8" class="Harita" id="pano"></div>
+     </div>
+     <center>
+       <h1 class="hız">Hız</h1>
+       <div class="hız1"><%= hız %>km</div>
+     </center>
+  </body>
+  <script src="/js/main.js"></script>
+  <script type="text/javascript" src="/js/till.js"></script>
+</html>
